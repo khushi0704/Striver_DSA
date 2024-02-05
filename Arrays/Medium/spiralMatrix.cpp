@@ -1,29 +1,39 @@
 vector<int> spiralMatrix(vector<vector<int>>&MATRIX) {
-    int row=0;
     int n=MATRIX.size();
     int m=MATRIX[0].size();
+    int startingRow=0;
+    int endingRow=n-1;
+    int startingCol=0;
+    int endingCol=m-1;
     vector <int>v;
-    while(row<m && row<n){
-    for(int firstRow=row;firstRow<m-row;firstRow++){
-        v.push_back(MATRIX[row][firstRow]);
+    int total=n*m;
+    int count=0;
+    while(count<total){
+    for(int firstRow=startingRow;count<total && firstRow<=endingCol;firstRow++){
+        v.push_back(MATRIX[startingRow][firstRow]);
+        count++;
     }
-    for(int lastCol=row+1;lastCol<n-row;lastCol++){
-        v.push_back(MATRIX[lastCol][m-row-1]);
-    }
-        // Traverse the last row (if there is one)
-        if (row < n - 1) {
-            for (int lastRow = m - row - 2; lastRow >= row; lastRow--) {
-                v.push_back(MATRIX[n - row - 1][lastRow]);
-            }
-        }
+    startingRow++;
 
-        // Traverse the first column (if there is one)
-        if (row < m - 1) {
-            for (int firstCol = n - row - 2; firstCol > row; firstCol--) {
-                v.push_back(MATRIX[firstCol][row]);
+    for(int lastCol=startingRow;count<total && lastCol<=endingRow;lastCol++){
+        v.push_back(MATRIX[lastCol][endingCol]);
+        count++;
+    }
+    endingCol--;
+
+    for (int lastRow = endingCol; count<total && lastRow>=startingCol; lastRow--) {
+        v.push_back(MATRIX[endingRow][lastRow]);
+        count++;
             }
+    endingRow--;
+
+    for (int firstCol = endingRow; count<total && firstCol>=startingRow; firstCol--) {
+        v.push_back(MATRIX[firstCol][startingCol]);
+        count++;
         }
-    row++;
-}
+    startingCol++;
+
+    }
+
     return v;
 }
