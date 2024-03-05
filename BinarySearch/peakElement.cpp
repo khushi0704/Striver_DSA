@@ -1,5 +1,4 @@
 int findPeakElement(vector<int> &arr) {
-
     // using brute force O(N)
     // first and last element 
     // peak is the element which is greater than its neighbours 
